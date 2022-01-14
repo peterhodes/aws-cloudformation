@@ -9,9 +9,8 @@ Resources:
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
       Properties:
-        GroupName: SecurityGroup
         GroupDescription: Security Group to allow Ports 22 and 80
-        VpcID: !Ref paramVpcId
+        GroupName: SecurityGroup
         SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: '22'
@@ -21,3 +20,4 @@ Resources:
           FromPort: '80'
           ToPort: '80'
           CidrIp: 0.0.0.0/0
+        VpcID: !Ref paramVpcId
