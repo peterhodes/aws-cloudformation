@@ -8,6 +8,8 @@
 # I've added comments so that what is happening can be seen.
 # It will be necessary to have access to the AWS CLI.
 
+# I would suggest after running the demo - to run each of the aws cli commands below - to build a picture of the resources you've created and how they relate to the stacks.
+
 
 echo "> Downloading vpc"
 curl -so vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpc
@@ -22,7 +24,7 @@ do
     CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-vpc`]' --output text)
 done
 VpcId=$(aws cloudformation list-stack-resources --stack-name stack-vpc --query 'StackResourceSummaries[*].PhysicalResourceId')
-echo ">Vpc Id is  >$VpcId<"
+echo ">Vpc Id is  >$VpcId<"     # We need to know the VPC ID to let the subnet know which VPC its going to become a member of.
 
 
 
