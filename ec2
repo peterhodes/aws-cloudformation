@@ -1,6 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
 
-
 Parameters:
   paramVpcId:
     Description: VPC Name
@@ -8,7 +7,6 @@ Parameters:
   paramKeyPair:
     Description: Keypair Name
     Type: AWS::EC2::KeyPair::KeyName
-
 
 Mappings:
   RegionMap:
