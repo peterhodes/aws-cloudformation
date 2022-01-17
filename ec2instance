@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
-  paramVpcId:
-    Description: VPC Name
+  paramSubnetId:
+    Description: Subnet Name
     Type: String
   paramKeyPair:
     Description: Keypair Name
@@ -15,3 +15,4 @@ Resources:
       InstanceType: t2.micro
       ImageId: ami-098828924dc89ea4a
       KeyName: !Ref paramKeyPair
+      SubnetId: !Ref paramSubnetId
