@@ -6,7 +6,7 @@ Parameters:
     Description: VPC Name
 
 Resources:
-  SecurityGroup:
+  mySecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Security Group to allow Ports 22 and 80
