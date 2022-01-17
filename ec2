@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  paramVpcId:
+    Description: VPC Name
+    Type: String
+  paramKeyPair:
+    Description: Keypair Name
+    Type: AWS::EC2::KeyPair::KeyName
+
+Mappings:
+  RegionMap:
+    eu-west-2:
+      AMI: ami-098828924dc89ea4a  
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-098828924dc89ea4a
+      KeyName: !Ref paramKeyPair
