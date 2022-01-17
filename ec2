@@ -8,11 +8,6 @@ Parameters:
     Description: Keypair Name
     Type: AWS::EC2::KeyPair::KeyName
 
-Mappings:
-  RegionMap:
-    eu-west-2:
-      AMI: ami-098828924dc89ea4a  
-
 Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
