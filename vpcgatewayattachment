@@ -4,7 +4,7 @@ Parameters:
   paramVpcId:
     Type: String
     Description: VPC ID
-  paramIgwID:
+  paramIgwId:
     Type: String
     Description: IGW ID
 
