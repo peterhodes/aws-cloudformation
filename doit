@@ -1,0 +1,70 @@
+#!/usr/bin/bash
+
+echo "> Downloading vpc"
+curl -so vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpc
+echo "> Creating stack-vpc"
+aws cloudformation create-stack --stack-name stack-vpc --template-body file://vpc
+
+CreateComplete=""
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-vpc  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-vpc`]' --output text)
+done
+VpcId=$(aws cloudformation list-stack-resources --stack-name stack-vpc --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> Vpc Id is  >$VpcId<"
+
+
+
+
+echo "> Downloading subnet"
+curl -so subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/subnet
+echo "> Creating stack-subnet"
+aws cloudformation create-stack --stack-name stack-subnet --template-body file://subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
+
+CreateComplete=""                 # We don't want to start the EC2 instance until we know the SubnetId - because that is a parameter for the EC2.
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-vpc  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet`]' --output text)
+done
+SubnetId=$(aws cloudformation list-stack-resources --stack-name stack-subnet --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> Subnet Id is  >$SubnetId<"
+
+
+
+
+echo "Downloading routetable"
+curl -so routetable https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/routetable
+echo "> Creating stack-routetable"
+aws cloudformation create-stack --stack-name stack-routetable --template-body file://routetable --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
+
+
+
+
+echo "Downloading securitygroup"
+curl -so securitygroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/securitygroup
+echo "> Creating stack-securitygroup"
+aws cloudformation create-stack --stack-name stack-securitygroup --template-body file://securitygroup --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
+
+
+
+
+echo "Downloading ec2instance"
+curl -so ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/ec2instance
+echo "> Creating stack-ec2instance"
+aws cloudformation create-stack --stack-name stack-ec2instance --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair
+
+
+
+
+echo "Downloading internetgateway"
+curl -so internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/internetgateway
+echo "> Creating stack-internetgateway"
+aws cloudformation create-stack --stack-name internetgateway --template-body file://internetgateway
+
+
+
+
