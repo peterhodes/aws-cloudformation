@@ -81,5 +81,5 @@ echo
 echo "> Downloading vpcgatewayattachment"
 curl -so vpcgatewayattachment https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpcgatewayattachment
 echo "> Creating stack-vpcgatewayattachment"
-aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://internetgateway --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramIgwId,ParameterValue=$IgwId
+aws cloudformation create-stack --stack-name stack-vpcgatewayattachment --template-body file://vpcgatewayattachment --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramIgwId,ParameterValue=$IgwId
 
