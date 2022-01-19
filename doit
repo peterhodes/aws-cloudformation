@@ -26,7 +26,7 @@ aws cloudformation create-stack --stack-name stack-subnet --template-body file:/
 CreateComplete=""                 # We don't want to start the EC2 instance until we know the SubnetId - because that is a parameter for the EC2.
 while [ "$CreateComplete" == "" ]
 do
-    echo  `date +"%H:%M:%S   waiting for  stack-vpc  creation to complete"`
+    echo  `date +"%H:%M:%S   waiting for  stack-subnet  creation to complete"`
     sleep 5
     CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet`]' --output text)
 done
@@ -65,11 +65,10 @@ curl -so internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudf
 echo "> Creating stack-internetgateway"
 aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://internetgateway
 
-echo 
 CreateComplete=""
 while [ "$CreateComplete" == "" ]
 do
-    echo  `date +"%H:%M:%S   waiting for  stack-vpc  creation to complete"`
+    echo  `date +"%H:%M:%S   waiting for  stack-internetgateway  creation to complete"`
     sleep 5
     CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-internetgateway`]' --output text)
 done
@@ -78,4 +77,9 @@ echo "> Igw Id is  >$IgwId<"
 
 
 
+echo
+echo "> Downloading vpcgatewayattachment"
+curl -so vpcgatewayattachment https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpcgatewayattachment
+echo "> Creating stack-vpcgatewayattachment"
+aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://internetgateway --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramIgwId,ParameterValue=$IgwId
 
