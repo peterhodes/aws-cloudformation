@@ -1,1 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
 
+Parameters:
+  paramVpcId:
+    Type: String
+    Description: VPC ID
+  paramIgwID:
+    Type: String
+    Description: IGW ID
+
+Resources:
+  myVPCGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref paramVpcId
+      InternetGatewayId: !Ref paramIgwID
