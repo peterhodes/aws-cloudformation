@@ -17,7 +17,7 @@ echo "> Vpc Id is  >$VpcId<"
 
 
 
-
+echo
 echo "> Downloading subnet"
 curl -so subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/subnet
 echo "> Creating stack-subnet"
@@ -35,35 +35,46 @@ echo "> Subnet Id is  >$SubnetId<"
 
 
 
-
-echo "Downloading routetable"
+echo
+echo "> Downloading routetable"
 curl -so routetable https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/routetable
 echo "> Creating stack-routetable"
 aws cloudformation create-stack --stack-name stack-routetable --template-body file://routetable --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
 
 
 
-
-echo "Downloading securitygroup"
+echo
+echo "> Downloading securitygroup"
 curl -so securitygroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/securitygroup
 echo "> Creating stack-securitygroup"
 aws cloudformation create-stack --stack-name stack-securitygroup --template-body file://securitygroup --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
 
 
 
-
-echo "Downloading ec2instance"
+echo
+echo "> Downloading ec2instance"
 curl -so ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/ec2instance
 echo "> Creating stack-ec2instance"
 aws cloudformation create-stack --stack-name stack-ec2instance --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair
 
 
 
-
-echo "Downloading internetgateway"
+echo
+echo "> Downloading internetgateway"
 curl -so internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/internetgateway
 echo "> Creating stack-internetgateway"
-aws cloudformation create-stack --stack-name internetgateway --template-body file://internetgateway
+aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://internetgateway
+
+echo 
+CreateComplete=""
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-vpc  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-internetgateway`]' --output text)
+done
+IgwId=$(aws cloudformation list-stack-resources --stack-name stack-internetgateway --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> Igw Id is  >$IgwId<"
 
 
 
