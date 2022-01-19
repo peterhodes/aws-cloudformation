@@ -13,4 +13,4 @@ Resources:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
       VpcId: !Ref paramVpcId
-      InternetGatewayId: !Ref paramIgwID
+      InternetGatewayId: !Ref paramIgwId
