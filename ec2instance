@@ -8,8 +8,8 @@ Parameters:
     Description: Keypair Name
     Type: AWS::EC2::KeyPair::KeyName
   paramSecurityGroupIds:
-    Description: Security Group ID
-    Type: CommaDelimitedList
+    Description: Security Group IDs
+    Type: AWS::EC2::SecurityGroup::Id
 
 Resources:
   myInstance:
