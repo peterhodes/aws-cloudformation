@@ -1,11 +1,15 @@
 #!/usr/bin/bash
 
+echo
 echo "> Downloading vpc"
 curl -so vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpc
 echo "> Creating stack-vpc"
 aws cloudformation create-stack --stack-name stack-vpc --template-body file://vpc
 
-CreateComplete=""
+
+
+echo "> Fetching VpcId"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-vpc`]' --output text)
 while [ "$CreateComplete" == "" ]
 do
     echo  `date +"%H:%M:%S   waiting for  stack-vpc  creation to complete"`
@@ -23,7 +27,11 @@ curl -so subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/
 echo "> Creating stack-subnet"
 aws cloudformation create-stack --stack-name stack-subnet --template-body file://subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
 
-CreateComplete=""                 # We don't want to start the EC2 instance until we know the SubnetId - because that is a parameter for the EC2.
+
+
+echo
+echo "> Fetching SubnetId"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet`]' --output text)                 
 while [ "$CreateComplete" == "" ]
 do
     echo  `date +"%H:%M:%S   waiting for  stack-subnet  creation to complete"`
@@ -65,7 +73,11 @@ curl -so internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudf
 echo "> Creating stack-internetgateway"
 aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://internetgateway
 
-CreateComplete=""
+
+
+echo
+echo "> Fetching IgwId"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-internetgateway`]' --output text)
 while [ "$CreateComplete" == "" ]
 do
     echo  `date +"%H:%M:%S   waiting for  stack-internetgateway  creation to complete"`
@@ -82,4 +94,18 @@ echo "> Downloading vpcgatewayattachment"
 curl -so vpcgatewayattachment https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpcgatewayattachment
 echo "> Creating stack-vpcgatewayattachment"
 aws cloudformation create-stack --stack-name stack-vpcgatewayattachment --template-body file://vpcgatewayattachment --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramIgwId,ParameterValue=$IgwId
+
+
+
+echo
+echo "> Fetching RouteTableId"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-routetable`]' --output text)
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-routetable  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-routetable`]' --output text)
+done
+RouteTableId=$(aws cloudformation list-stack-resources --stack-name stack-routetable --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> RouteTable Id is  >$RouteTableId<"
 
