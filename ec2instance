@@ -15,4 +15,4 @@ Resources:
       InstanceType: t2.micro
       ImageId: ami-098828924dc89ea4a
       KeyName: !Ref paramKeyPair
-      SubnetId: !Ref paramSubnetId
+      Comment: SubnetId: !Ref paramSubnetId
