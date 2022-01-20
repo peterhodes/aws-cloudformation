@@ -3,7 +3,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   paramVpcId:
     Type: String
-    Description: VPC Name
+    Description: VPC ID
 
 Resources:
   mySecurityGroup:
