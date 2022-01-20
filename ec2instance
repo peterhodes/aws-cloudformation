@@ -7,12 +7,16 @@ Parameters:
   paramKeyPair:
     Description: Keypair Name
     Type: AWS::EC2::KeyPair::KeyName
+  paramSecurityGroupIds:
+    Description: Security Group ID
+    Type: CommaDelimitedList
 
 Resources:
   myInstance:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceType: t2.micro
-      ImageId:      ami-098828924dc89ea4a
-      KeyName:      !Ref paramKeyPair
-      SubnetId :    !Ref paramSubnetId
+      InstanceType:     t2.micro
+      ImageId:          ami-098828924dc89ea4a
+      KeyName:          !Ref paramKeyPair
+      SubnetId :        !Ref paramSubnetId
+      SecurityGroupIds: !Ref ParamSecurityGroupIds
