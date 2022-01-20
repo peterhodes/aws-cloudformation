@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
   paramSubnetId:
-    Description: Subnet Name
+    Description: Subnet ID
     Type: String
   paramKeyPair:
     Description: Keypair Name
@@ -13,5 +13,6 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-098828924dc89ea4a
-      KeyName: !Ref paramKeyPair
+      ImageId:      ami-098828924dc89ea4a
+      KeyName:      !Ref paramKeyPair
+      SubnetId :    !Ref paramSubnetId
