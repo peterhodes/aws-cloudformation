@@ -61,14 +61,6 @@ aws cloudformation create-stack --stack-name stack-securitygroup --template-body
 
 
 echo
-echo "> Downloading template ec2instance"
-curl -so ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/ec2instance
-echo "> Creating stack-ec2instance"
-aws cloudformation create-stack --stack-name stack-ec2instance --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair
-
-
-
-echo
 echo "> Downloading template internetgateway"
 curl -so internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/internetgateway
 echo "> Creating stack-internetgateway"
@@ -126,4 +118,11 @@ curl -so subnetroutetableassociation https://raw.githubusercontent.com/peterhode
 echo "> Creating stack-subnetroutetableassociation"
 aws cloudformation create-stack --stack-name stack-subnetroutetableassociation --template-body file://subnetroutetableassociation --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId
 
+
+
+echo
+echo "> Downloading template ec2instance"
+curl -so ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/ec2instance
+echo "> Creating stack-ec2instance"
+aws cloudformation create-stack --stack-name stack-ec2instance --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair
 
