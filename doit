@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 echo
-echo "> Downloading vpc"
+echo "> Downloading template vpc"
 curl -so vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpc
 echo "> Creating stack-vpc"
 aws cloudformation create-stack --stack-name stack-vpc --template-body file://vpc
@@ -23,7 +23,7 @@ echo "> Vpc Id is  >$VpcId<"
 
 
 echo
-echo "> Downloading subnet"
+echo "> Downloading template subnet"
 curl -so subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/subnet
 echo "> Creating stack-subnet"
 aws cloudformation create-stack --stack-name stack-subnet --template-body file://subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
@@ -45,7 +45,7 @@ echo "> Subnet Id is  >$SubnetId<"
 
 
 echo
-echo "> Downloading routetable"
+echo "> Downloading template routetable"
 curl -so routetable https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/routetable
 echo "> Creating stack-routetable"
 aws cloudformation create-stack --stack-name stack-routetable --template-body file://routetable --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
@@ -53,7 +53,7 @@ aws cloudformation create-stack --stack-name stack-routetable --template-body fi
 
 
 echo
-echo "> Downloading securitygroup"
+echo "> Downloading template securitygroup"
 curl -so securitygroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/securitygroup
 echo "> Creating stack-securitygroup"
 aws cloudformation create-stack --stack-name stack-securitygroup --template-body file://securitygroup --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
@@ -61,7 +61,7 @@ aws cloudformation create-stack --stack-name stack-securitygroup --template-body
 
 
 echo
-echo "> Downloading ec2instance"
+echo "> Downloading template ec2instance"
 curl -so ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/ec2instance
 echo "> Creating stack-ec2instance"
 aws cloudformation create-stack --stack-name stack-ec2instance --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair
@@ -69,7 +69,7 @@ aws cloudformation create-stack --stack-name stack-ec2instance --template-body f
 
 
 echo
-echo "> Downloading internetgateway"
+echo "> Downloading template internetgateway"
 curl -so internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/internetgateway
 echo "> Creating stack-internetgateway"
 aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://internetgateway
@@ -91,7 +91,7 @@ echo "> Igw Id is  >$IgwId<"
 
 
 echo
-echo "> Downloading vpcgatewayattachment"
+echo "> Downloading template vpcgatewayattachment"
 curl -so vpcgatewayattachment https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpcgatewayattachment
 echo "> Creating stack-vpcgatewayattachment"
 aws cloudformation create-stack --stack-name stack-vpcgatewayattachment --template-body file://vpcgatewayattachment --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramIgwId,ParameterValue=$IgwId
@@ -113,9 +113,17 @@ echo "> RouteTable Id is  >$RouteTableId<"
 
 
 echo
-echo "> Downloading route"
+echo "> Downloading template route"
 curl -so route https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/route
 echo "> Creating stack-route"
 aws cloudformation create-stack --stack-name stack-route --template-body file://route --parameters ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId ParameterKey=paramGatewayId,ParameterValue=$IgwId
+
+
+
+echo
+echo "> Downloading template subnetroutetableassociation"
+curl -so subnetroutetableassociation https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/subnetroutetableassociation
+echo "> Creating stack-subnetroutetableassociation"
+aws cloudformation create-stack --stack-name stack-subnetroutetableassociation --template-body file://subnetroutetableassociation --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId
 
 
