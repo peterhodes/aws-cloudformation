@@ -116,6 +116,6 @@ echo
 echo "> Downloading route"
 curl -so route https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/route
 echo "> Creating stack-route"
-aws cloudformation create-stack --stack-name stack-route --template-body file://route --parameters ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId
+aws cloudformation create-stack --stack-name stack-route --template-body file://route --parameters ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId ParameterKey=paramGatewayId,ParameterValue=$IgwId
 
 
