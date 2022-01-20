@@ -11,6 +11,7 @@ Resources:
     Properties:
       GroupDescription: Security Group to allow Ports 22 and 80
       GroupName: SecurityGroup
+      VpcId: !Ref paramVpcId      
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: '22'
@@ -20,4 +21,3 @@ Resources:
         FromPort: '80'
         ToPort: '80'
         CidrIp: 0.0.0.0/0
-      VpcId: !Ref paramVpcId
