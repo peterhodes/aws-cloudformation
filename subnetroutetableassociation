@@ -12,7 +12,5 @@ Resources:
   mySubnetRouteTableAssociation:
      Type: AWS::EC2::SubnetRouteTableAssociation
      Properties:
-      SubnetId:
-        Ref: !Ref paramSubnetId
-      RouteTableId:
-        Ref: !Ref paramRouteTableId
+      SubnetId: !Ref paramSubnetId
+      RouteTableId: !Ref paramRouteTableId
