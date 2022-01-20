@@ -8,6 +8,7 @@ aws cloudformation create-stack --stack-name stack-vpc --template-body file://vp
 
 
 
+echo
 echo "> Fetching VpcId"
 CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-vpc`]' --output text)
 while [ "$CreateComplete" == "" ]
@@ -108,4 +109,13 @@ do
 done
 RouteTableId=$(aws cloudformation list-stack-resources --stack-name stack-routetable --query 'StackResourceSummaries[*].PhysicalResourceId')
 echo "> RouteTable Id is  >$RouteTableId<"
+
+
+
+echo
+echo "> Downloading route"
+curl -so route https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/route
+echo "> Creating stack-route"
+aws cloudformation create-stack --stack-name stack-route --template-body file://route --parameters ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId
+
 
