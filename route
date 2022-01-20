@@ -4,10 +4,14 @@ Parameters:
   paramRouteTableId:
     Type: String
     Description: Route Table ID
+  paramGatewayId:
+    Type: String
+    Description: IGW ID
 
 Resources:
   myRoute:
     Type: AWS::EC2::Route
     Properties:
       RouteTableId: !Ref paramRouteTableId
+      GatewayId: !Ref paramGatewayId   
       DestinationCidrBlock : 0.0.0.0/0
