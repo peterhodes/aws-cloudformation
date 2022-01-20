@@ -10,3 +10,4 @@ Resources:
     Type: AWS::EC2::Route
     Properties:
       RouteTableId: !Ref paramRouteTableId
+      DestinationCidrBlock : 0.0.0.0/0
