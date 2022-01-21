@@ -19,4 +19,4 @@ Resources:
       ImageId:          ami-098828924dc89ea4a
       KeyName:          !Ref paramKeyPair
       SubnetId :        !Ref paramSubnetId
-      SecurityGroupIds: !Ref ParamSecurityGroupIds
+      SecurityGroupIds: !Ref paramSecurityGroupIds
