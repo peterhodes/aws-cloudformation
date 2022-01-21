@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
 echo
-echo "> Downloading template vpc"
-curl -so vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpc
+echo "> Downloading template demo-vpc"
+curl -so demo-vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-vpc
 echo "> Creating stack-vpc"
-aws cloudformation create-stack --stack-name stack-vpc --template-body file://vpc
+aws cloudformation create-stack --stack-name stack-vpc --template-body file://demo-vpc
 
 
 
@@ -23,10 +23,10 @@ echo "> Vpc Id is  >$VpcId<"
 
 
 echo
-echo "> Downloading template subnet"
-curl -so subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/subnet
+echo "> Downloading template demo-subnet"
+curl -so demo-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-subnet
 echo "> Creating stack-subnet"
-aws cloudformation create-stack --stack-name stack-subnet --template-body file://subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
+aws cloudformation create-stack --stack-name stack-subnet --template-body file://demo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
 
 
 
@@ -45,26 +45,26 @@ echo "> Subnet Id is  >$SubnetId<"
 
 
 echo
-echo "> Downloading template routetable"
-curl -so routetable https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/routetable
+echo "> Downloading template demo-routetable"
+curl -so demo-routetable https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-routetable
 echo "> Creating stack-routetable"
-aws cloudformation create-stack --stack-name stack-routetable --template-body file://routetable --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
+aws cloudformation create-stack --stack-name stack-routetable --template-body file://demo-routetable --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
 
 
 
 echo
-echo "> Downloading template securitygroup"
-curl -so securitygroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/securitygroup
+echo "> Downloading template demo-securitygroup"
+curl -so demo-securitygroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-securitygroup
 echo "> Creating stack-securitygroup"
-aws cloudformation create-stack --stack-name stack-securitygroup --template-body file://securitygroup --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
+aws cloudformation create-stack --stack-name stack-securitygroup --template-body file://demo-securitygroup --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
 
 
 
 echo
-echo "> Downloading template internetgateway"
-curl -so internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/internetgateway
+echo "> Downloading template demo-internetgateway"
+curl -so demo-internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-internetgateway
 echo "> Creating stack-internetgateway"
-aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://internetgateway
+aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://demo-internetgateway
 
 
 
@@ -83,10 +83,10 @@ echo "> Igw Id is  >$IgwId<"
 
 
 echo
-echo "> Downloading template vpcgatewayattachment"
-curl -so vpcgatewayattachment https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/vpcgatewayattachment
+echo "> Downloading template demo-vpcgatewayattachment"
+curl -so demo-vpcgatewayattachment https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-vpcgatewayattachment
 echo "> Creating stack-vpcgatewayattachment"
-aws cloudformation create-stack --stack-name stack-vpcgatewayattachment --template-body file://vpcgatewayattachment --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramIgwId,ParameterValue=$IgwId
+aws cloudformation create-stack --stack-name stack-vpcgatewayattachment --template-body file://demo-vpcgatewayattachment --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramIgwId,ParameterValue=$IgwId
 
 
 
@@ -105,18 +105,18 @@ echo "> RouteTable Id is  >$RouteTableId<"
 
 
 echo
-echo "> Downloading template route"
-curl -so route https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/route
+echo "> Downloading template demo-route"
+curl -so demo-route https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-route
 echo "> Creating stack-route"
-aws cloudformation create-stack --stack-name stack-route --template-body file://route --parameters ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId ParameterKey=paramGatewayId,ParameterValue=$IgwId
+aws cloudformation create-stack --stack-name stack-route --template-body file://demo-route --parameters ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId ParameterKey=paramGatewayId,ParameterValue=$IgwId
 
 
 
 echo
-echo "> Downloading template subnetroutetableassociation"
-curl -so subnetroutetableassociation https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/subnetroutetableassociation
+echo "> Downloading template demo-subnetroutetableassociation"
+curl -so demo-subnetroutetableassociation https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-subnetroutetableassociation
 echo "> Creating stack-subnetroutetableassociation"
-aws cloudformation create-stack --stack-name stack-subnetroutetableassociation --template-body file://subnetroutetableassociation --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId
+aws cloudformation create-stack --stack-name stack-subnetroutetableassociation --template-body file://demo-subnetroutetableassociation --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId
 
 
 
@@ -135,10 +135,10 @@ echo "> SecurityGroup Id is  >$SecurityGroupId<"
 
 
 echo
-echo "> Downloading template ec2instance"
-curl -so ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/ec2instance
+echo "> Downloading template demo-ec2instance"
+curl -so demo-ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-ec2instance
 echo "> Creating stack-ec2instance"
-aws cloudformation create-stack --stack-name stack-ec2instance     --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair ParameterKey=paramSecurityGroupIds,ParameterValue=$SecurityGroupId
+aws cloudformation create-stack --stack-name stack-ec2instance     --template-body file://demo-ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair ParameterKey=paramSecurityGroupIds,ParameterValue=$SecurityGroupId
 
 
 
