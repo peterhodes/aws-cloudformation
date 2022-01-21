@@ -1,5 +1,35 @@
 #!/usr/bin/bash
 
+# Pre-requisites.
+#
+# 1. Full access of AWS CLI - Ideally admin access in a training environment. Although not imperative for this - do please always use MFA to access your account.
+# 2. Access to https://github.com/peterhodes/aws-cloudformation.   If you're reading this, I'm guessing you have this !
+
+
+# Advantages.
+#
+# 1. Automatically creates the components necessary to create an EC2.
+# 2. Configuration files can be viewed and their elements understood.
+# 3. Individual stacks allow the user to understand each component individually (usually everything would be wrapped up into one stack).
+# 4. Liberal use of aws cli commands to gather dependency information gives the user an opportunity to gain familiarity with aws cli.
+
+# Getting started.
+#
+# 1. Download this file - place it in a directory - and run it.
+
+# Command line tools to make life easier.
+#
+# https://github.com/peterhodes/stackstatus
+# https://github.com/peterhodes/stackresources
+# https://github.com/peterhodes/stackdelete
+# https://github.com/peterhodes/stackdeleteall
+# https://github.com/peterhodes/stackstatus
+# https://github.com/peterhodes/awsquery
+# https://github.com/peterhodes/awsbilling
+
+
+
+
 echo
 echo "> Downloading template demo-vpc"
 curl -so demo-vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-vpc
