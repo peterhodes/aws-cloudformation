@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Resources:
+  myInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType:     t2.micro
+      ImageId:          ami-098828924dc89ea4a
+      KeyName:          peterKeyPair
+      SubnetId :        subnet-014e7113747bddfe9 
+      SecurityGroupIds: sg-0192c6c59ca175c41
