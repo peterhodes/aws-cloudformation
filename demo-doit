@@ -27,6 +27,17 @@
 # https://github.com/peterhodes/awsquery
 # https://github.com/peterhodes/awsbilling
 
+# Questions.
+# 1. Why not do it in one stack ?
+#   1a. I wanted this to be a reference as well as a demo - in which each file would represent a simple CloudformationComponent.
+#   1b. I wanted there to be lots of stacks so that we could get used to working with lots of stacks simultaneously.
+#   1c. I wanted to be in a position to use the aws cli to get dependency information and pass that data as parameters back into other stacks.
+#       This also then adds an additional learning opportunity.
+# 2. Why not use stack outputs ?
+#   2a. See 1c.
+# 3. Can this be used for an AWS beginner.
+#   3a. Yes and I would encourage that. It creates all of the components for and including an EC2 - without ever (let's say rarely) having to use the Web interfaces.
+#       Someone new to AWS can then investigate each component both within the web interface and through the online configuration.
 
 
 
