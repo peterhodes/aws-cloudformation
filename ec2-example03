@@ -1,4 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  paramX:
+    Description: Subnet ID
+    Type: CommaDelimitedList
+    Default: sg-a123fd85, sg-b456ge94
+
 
 Resources:
   myInstance:
@@ -8,4 +14,4 @@ Resources:
       ImageId:          ami-098828924dc89ea4a
       KeyName:          peterKeyPair
       SubnetId :        subnet-014e7113747bddfe9 
-      SecurityGroupIds: [sg-0192c6c59ca175c41]
+      SecurityGroupIds: !Ref paramX
