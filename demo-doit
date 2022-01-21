@@ -4,8 +4,11 @@
 #
 # 1. Full access of AWS CLI - Ideally admin access in a training environment. Although not imperative for this - do please always use MFA to access your account.
 # 2. Access to https://github.com/peterhodes/aws-cloudformation.   If you're reading this, I'm guessing you have this !
-# 3. You will need to create a ec2 keypair and name it peterKeyPair - or if you have your own key then just replace that in the text.
-#    Alternatively - just remove entries to the keypair and run the script without a keypair - you won't be able to access the EC2 - but thats not the main purpose anyway.
+# 3. Keypair file options :
+#   3a. If you have one already and want to use that - then just replace "peterKeyPair" in this file with the name of your own keypair.
+#   3b. Create one with this command # aws ec2 create-key-pair --key-name peterKeyPair > aws-key-pair.pem
+#       It's not imperative that you connect to the EC2 instance that you create.
+# 4. Finally - please use the eu-west-2 region (if you use another region you will have to update the ami in the ec2instance template.
 
 # Advantages.
 #
