@@ -140,9 +140,9 @@ echo
 echo "> Downloading template ec2instance"
 curl -so ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/ec2instance
 echo "> Creating stack-ec2instance"
-aws cloudformation create-stack --stack-name stack-ec2instance     --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair ParameterKey=paramSecurityGroupIds,ParameterValue=peterKeyPair
-echo "> Creating stack-ec2instance-def"
-aws cloudformation create-stack --stack-name stack-ec2instance-def --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=subnet-014e7113747bddfe9 ParameterKey=paramKeyPair,ParameterValue=peterKeyPair
+aws cloudformation create-stack --stack-name stack-ec2instance     --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair ParameterKey=paramSecurityGroupIds,ParameterValue=$SecurityGroupId
+# echo "> Creating stack-ec2instance-def"
+# aws cloudformation create-stack --stack-name stack-ec2instance-def --template-body file://ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=subnet-014e7113747bddfe9 ParameterKey=paramKeyPair,ParameterValue=peterKeyPair
 
 
 
