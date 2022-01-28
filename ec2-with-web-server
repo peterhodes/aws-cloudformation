@@ -1,6 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   SSHKeyName:
+    Default: ''
     Description: EC2 KeyPair for SSH access.
     Type: String
 
