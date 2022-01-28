@@ -28,7 +28,7 @@ Resources:
           files: 
             /var/www/html/index.php:
               content: !Sub |
-                <?php print "Peter !"; ?>
+                <?php print "Hello Peter !"; ?>
           services: 
             sysvinit:
               httpd:
