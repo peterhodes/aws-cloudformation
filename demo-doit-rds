@@ -1,0 +1,43 @@
+#!/usr/bin/bash
+
+
+echo
+echo "> Fetching VpcId"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-vpc`]' --output text)
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-vpc  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-vpc`]' --output text)
+done
+VpcId=$(aws cloudformation list-stack-resources --stack-name stack-vpc --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> Vpc Id is  >$VpcId<"
+
+
+
+echo
+echo "> Downloading template demo-subnet"
+curl -so demo-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-subnet
+echo "> Creating stack-subnet"
+aws cloudformation create-stack --stack-name stack-subnet --template-body file://demo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.1/24
+aws cloudformation create-stack --stack-name stack-subnet --template-body file://demo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.2/24
+
+
+
+
+echo
+echo "> Fetching SubnetId"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet`]' --output text)                 
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-subnet  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet`]' --output text)
+done
+SubnetId=$(aws cloudformation list-stack-resources --stack-name stack-subnet --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> Subnet Id is  >$SubnetId<"
+
+exit
+
+
+
