@@ -71,8 +71,9 @@ echo
 echo "> Downloading template demo-subnet"
 curl -so demo-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-subnet
 echo "> Creating stack-subnet"
-aws cloudformation create-stack --stack-name stack-subnet --template-body file://demo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
+aws cloudformation create-stack --stack-name stack-subnet --template-body file://demo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.0/24
 
+exit
 
 
 echo
