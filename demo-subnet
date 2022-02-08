@@ -2,13 +2,16 @@ AWSTemplateFormatVersion: '2010-09-09'
 
 Parameters:
   paramVpcId:
-    Type: String
     Description: VPC Name
+    Type: String
+  paramCidrBlock:
+    Description: Cidr String
+    Type: String
 
 Resources:
   mySubnet:
     Type: AWS::EC2::Subnet
     Properties:
-      CidrBlock: 10.0.0.0/24
+      CidrBlock: !Ref paramCidrString
       VpcId: !Ref paramVpcId
       MapPublicIpOnLaunch: True
