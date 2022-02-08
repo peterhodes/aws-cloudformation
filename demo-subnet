@@ -12,6 +12,6 @@ Resources:
   mySubnet:
     Type: AWS::EC2::Subnet
     Properties:
-      CidrBlock: !Ref paramCidrString
+      CidrBlock: !Ref paramCidrBlock
       VpcId: !Ref paramVpcId
       MapPublicIpOnLaunch: True
