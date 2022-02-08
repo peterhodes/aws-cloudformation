@@ -73,7 +73,6 @@ curl -so demo-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudforma
 echo "> Creating stack-subnet"
 aws cloudformation create-stack --stack-name stack-subnet --template-body file://demo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.0/24
 
-exit
 
 
 echo
@@ -88,6 +87,7 @@ done
 SubnetId=$(aws cloudformation list-stack-resources --stack-name stack-subnet --query 'StackResourceSummaries[*].PhysicalResourceId')
 echo "> Subnet Id is  >$SubnetId<"
 
+exit
 
 
 echo
