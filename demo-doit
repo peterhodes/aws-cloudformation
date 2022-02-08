@@ -87,7 +87,6 @@ done
 SubnetId=$(aws cloudformation list-stack-resources --stack-name stack-subnet --query 'StackResourceSummaries[*].PhysicalResourceId')
 echo "> Subnet Id is  >$SubnetId<"
 
-exit
 
 
 echo
