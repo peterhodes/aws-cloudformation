@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  paramSubnetIds:
+    Description: Subnet IDs
+    Type: List of String
+
+Resources:
+  myDBSubnetGroup:
+    Type: 'AWS::RDS::DBSubnetGroup'
+    Properties:
+      DBSubnetGroupName: SubnetGroup
+      SubnetIds: 
+        - paramSubnetIds
