@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+
+
+
+echo
+echo "> Fetching VpcId"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-vpc`]' --output text)
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-vpc  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-vpc`]' --output text)
+done
+VpcId=$(aws cloudformation list-stack-resources --stack-name stack-vpc --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> Vpc Id is  >$VpcId<"
+
+
+
+echo
+echo "> Downloading template rdsdemo-subnet"
+curl -so networkdemo-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/networkdemo-subnet
+echo "> Creating stack-subnet1  paramVpcId=$VpcId paramCidrBlock=10.0.0.1/24 paramAvailabilityZone=eu-west-2a"
+aws cloudformation create-stack --stack-name stack-subnet1 --template-body file://networkdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.1/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2a
+echo "> Creating stack-subnet2  paramVpcId=$VpcId paramCidrBlock=10.0.0.2/24 paramAvailabilityZone=eu-west-2b"
+aws cloudformation create-stack --stack-name stack-subnet2 --template-body file://networkdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.2/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2b
+echo "> Creating stack-subnet3  paramVpcId=$VpcId paramCidrBlock=10.0.0.3/24 paramAvailabilityZone=eu-west-2c"
+aws cloudformation create-stack --stack-name stack-subnet3 --template-body file://networkdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.3/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2c
+
+
