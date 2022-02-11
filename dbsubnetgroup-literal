@@ -1,0 +1,10 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources: 
+  myDBSubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties: 
+      DBSubnetGroupDescription: description
+      SubnetIds: 
+        - subnet-0be572d21f05ad2a2
+        - subnet-0f688e01d5d4305e5
+        - subnet-0f6830265c1deaab1
