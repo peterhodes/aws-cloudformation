@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  paramVpcId:
+    Description: VPC Name
+    Type: String
+  paramCidrBlock:
+    Description: Cidr String
+    Type: String
+  paramAvailabilityZone:
+    Description: Availability Zone
+    Type: String
+
+Resources:
+  mySubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref paramCidrBlock
+      VpcId: !Ref paramVpcId
+      AvailabilityZone: paramAvailabilityZone
