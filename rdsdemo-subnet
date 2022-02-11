@@ -17,4 +17,4 @@ Resources:
     Properties:
       CidrBlock: !Ref paramCidrBlock
       VpcId: !Ref paramVpcId
-      AvailabilityZone: paramAvailabilityZone
+      AvailabilityZone: !Ref paramAvailabilityZone
