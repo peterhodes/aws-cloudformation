@@ -176,14 +176,3 @@ do
 done
 SecurityGroupId=$(aws cloudformation list-stack-resources --stack-name stack-securitygroup --query 'StackResourceSummaries[*].PhysicalResourceId')
 echo "> SecurityGroup Id is  >$SecurityGroupId<"
-
-
-
-echo
-echo "> Downloading template demo-ec2instance"
-curl -so demo-ec2instance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-ec2instance
-echo "> Creating stack-ec2instance  paramSubnetId$SubnetId paramKeyPair=peterKeyPair paramSecurityGroupIds=$SecurityGroupId"
-aws cloudformation create-stack --stack-name stack-ec2instance --template-body file://demo-ec2instance --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramKeyPair,ParameterValue=peterKeyPair ParameterKey=paramSecurityGroupIds,ParameterValue=$SecurityGroupId
-
-
-
