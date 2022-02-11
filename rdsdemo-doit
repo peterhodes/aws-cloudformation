@@ -19,11 +19,11 @@ echo "> Vpc Id is  >$VpcId<"
 echo
 echo "> Downloading template rdsdemo-subnet"
 curl -so rdsdemo-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/rdsdemo-subnet
-echo "> Creating stack-subnet1  paramVpcId=$VpcId paramCidrBlock=10.0.0.1/24 paramAvailabilityZone=eu-west-2a"
-aws cloudformation create-stack --stack-name stack-subnet1 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.1/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2a
-echo "> Creating stack-subnet2  paramVpcId=$VpcId paramCidrBlock=10.0.0.2/24 paramAvailabilityZone=eu-west-2b"
-aws cloudformation create-stack --stack-name stack-subnet2 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.2/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2b
-echo "> Creating stack-subnet3  paramVpcId=$VpcId paramCidrBlock=10.0.0.3/24 paramAvailabilityZone=eu-west-2c"
-aws cloudformation create-stack --stack-name stack-subnet3 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.3/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2c
+echo "> Creating stack-subnet1  paramVpcId=$VpcId paramCidrBlock=10.0.1.0/24 paramAvailabilityZone=eu-west-2a"
+aws cloudformation create-stack --stack-name stack-subnet1 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.1.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2a
+echo "> Creating stack-subnet2  paramVpcId=$VpcId paramCidrBlock=10.0.2.0/24 paramAvailabilityZone=eu-west-2b"
+aws cloudformation create-stack --stack-name stack-subnet2 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.2.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2b
+echo "> Creating stack-subnet3  paramVpcId=$VpcId paramCidrBlock=10.0.3.0/24 paramAvailabilityZone=eu-west-2c"
+aws cloudformation create-stack --stack-name stack-subnet3 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.3.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2c
 
 
