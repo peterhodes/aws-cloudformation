@@ -41,6 +41,34 @@ echo "> SubnetId01 is  >$SubnetId01<"
 
 
 
+echo
+echo "> Fetching SubnetId02"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet02`]' --output text)                 
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-subnet01  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet02`]' --output text)
+done
+SubnetId02=$(aws cloudformation list-stack-resources --stack-name stack-subnet02 --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> SubnetId02 is  >$SubnetId02<"
+
+
+
+echo
+echo "> Fetching SubnetId03"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet03`]' --output text)                 
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-subnet03  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet03`]' --output text)
+done
+SubnetId01=$(aws cloudformation list-stack-resources --stack-name stack-subnet01 --query 'StackResourceSummaries[*].PhysicalResourceId')
+echo "> SubnetId03 is  >$SubnetId03<"
+
+
+
 # echo
 # echo "> Downloading template rdsdemo-dbsubnetgroup"
 # curl -so rdsdemo-dbsubnetgroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/rdsdemo-dbsubnetgroup
