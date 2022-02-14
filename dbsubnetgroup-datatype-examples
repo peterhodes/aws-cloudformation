@@ -8,3 +8,4 @@ Resources:
         - subnet-093615f66fbc77631
         - subnet-09ad66ee2277a2dc1
         - subnet-0f16c22fbc9936a42
+      SubnetIds: !Split [ "," , "subnet-093615f66fbc77631,subnet-09ad66ee2277a2dc1,subnet-0f16c22fbc9936a42" ]
