@@ -64,7 +64,7 @@ do
     sleep 5
     CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-subnet03`]' --output text)
 done
-SubnetId01=$(aws cloudformation list-stack-resources --stack-name stack-subnet01 --query 'StackResourceSummaries[*].PhysicalResourceId')
+SubnetId03=$(aws cloudformation list-stack-resources --stack-name stack-subnet01 --query 'StackResourceSummaries[*].PhysicalResourceId')
 echo "> SubnetId03 is  >$SubnetId03<"
 
 
