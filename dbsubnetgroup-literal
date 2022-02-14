@@ -5,6 +5,6 @@ Resources:
     Properties: 
       DBSubnetGroupDescription: description
       SubnetIds: 
-        - subnet-0be572d21f05ad2a2
-        - subnet-0f688e01d5d4305e5
-        - subnet-0f6830265c1deaab1
+        - subnet-093615f66fbc77631
+        - subnet-09ad66ee2277a2dc1
+        - subnet-0f16c22fbc9936a42
