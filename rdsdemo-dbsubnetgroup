@@ -12,4 +12,4 @@ Resources:
     Properties:
       DBSubnetGroupName:        mySubnetGroupName
       DBSubnetGroupDescription: mySubnetGroupDescription
-      SubnetIds: SubnetIds:     !Ref paramSubnetIds
+      SubnetIds:                !Ref paramSubnetIds
