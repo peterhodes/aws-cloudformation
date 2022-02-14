@@ -3,12 +3,13 @@ AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   paramSubnetIds:
     Description: Subnet IDs
-    Type: CommaDelimitedList
+    Type: List<AWS::EC2::Subnet::Id>
+
     
 Resources:
   myDBSubnetGroup:
-    Type: 'AWS::RDS::DBSubnetGroup'
+    Type: "AWS::RDS::DBSubnetGroup"
     Properties:
-      DBSubnetGroupName: SubnetGroup
-      SubnetIds: 
-        - paramSubnetIds
+      DBSubnetGroupName:        mySubnetGroupName
+      DBSubnetGroupDescription: mySubnetGroupDescription
+      SubnetIds: SubnetIds:     !Ref paramSubnetIds
