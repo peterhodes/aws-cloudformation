@@ -68,9 +68,10 @@ SubnetId03=$(aws cloudformation list-stack-resources --stack-name stack-subnet01
 echo "> SubnetId03 is  >$SubnetId03<"
 
 
+SubnetIds="$SubnetId01,$SubnetId02,$SubnetId03"
 
-# echo
-# echo "> Downloading template rdsdemo-dbsubnetgroup"
-# curl -so rdsdemo-dbsubnetgroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/rdsdemo-dbsubnetgroup
-# echo "> Creating stack-dbsubnetgroup  paramVpcId=$VpcId paramCidrBlock=10.0.1.0/24 paramAvailabilityZone=eu-west-2a"
-# aws cloudformation create-stack --stack-name stack-subnet1 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.1.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2a
+echo
+echo "> Downloading template rdsdemo-dbsubnetgroup"
+curl -so rdsdemo-dbsubnetgroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/rdsdemo-dbsubnetgroup
+echo "> Creating stack-dbsubnetgroup  paramSubnetIds=$SubnetIds"
+aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body file://rdsdemo-dbsubnetgroup --parameters ParameterKey=paramSubnetIds,ParameterValue=$SubnetIds
