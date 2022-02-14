@@ -68,10 +68,10 @@ SubnetId03=$(aws cloudformation list-stack-resources --stack-name stack-subnet01
 echo "> SubnetId03 is  >$SubnetId03<"
 
 
-SubnetIds="$SubnetId01,$SubnetId02,$SubnetId03"
 
 echo
 echo "> Downloading template rdsdemo-dbsubnetgroup"
 curl -so rdsdemo-dbsubnetgroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/rdsdemo-dbsubnetgroup
+SubnetIds="$SubnetId01,$SubnetId02,$SubnetId03"
 echo "> Creating stack-dbsubnetgroup  paramSubnetIds=$SubnetIds"
-aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body file://rdsdemo-dbsubnetgroup --parameters ParameterKey=paramSubnetIds,ParameterValue=$SubnetIds
+aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body file://rdsdemo-dbsubnetgroup --parameters ParameterKey=paramSubnetIds,ParameterValue=\"$SubnetIds\"
