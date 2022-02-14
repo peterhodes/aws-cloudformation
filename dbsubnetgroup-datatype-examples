@@ -24,7 +24,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 Parameters:
   paramSubnetIds:
     Description: Subnet IDs
-    Type: List<String>
+    Type: String
     Default: "subnet-093615f66fbc77631,subnet-09ad66ee2277a2dc1,subnet-0f16c22fbc9936a42"
 
 Resources: 
@@ -32,4 +32,20 @@ Resources:
     Type: "AWS::RDS::DBSubnetGroup"
     Properties: 
       DBSubnetGroupDescription: description
-      SubnetIds: !Split [ "," , "subnet-093615f66fbc77631,subnet-09ad66ee2277a2dc1,subnet-0f16c22fbc9936a42" ]
+      SubnetIds: !Split [ "," , !Ref paramSubnetIds ]
+
+#################################################################################################################
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  paramSubnetIds:
+    Description: Subnet IDs
+    Type: List<String>  or  CommaDelimitedList or List<AWS::EC2::Subnet::Id>
+    Default: subnet-093615f66fbc77631,subnet-09ad66ee2277a2dc1,subnet-0f16c22fbc9936a42
+
+Resources: 
+  myDBSubnetGroup:
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties: 
+      DBSubnetGroupDescription: description
+      SubnetIds: !Ref paramSubnetIds 
