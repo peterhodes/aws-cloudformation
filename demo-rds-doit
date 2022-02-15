@@ -77,6 +77,20 @@ echo "> Creating stack-dbsubnetgroup  paramSubnetIds=$SubnetIds"
 aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body file://demo-rds-dbsubnetgroup --parameters ParameterKey=paramSubnetIds,ParameterValue=\"$SubnetIds\"
 
 
+
+echo
+echo "> Waiting for demo-rds-dbsubnetgroup"
+CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-dbsubnetgroup`]' --output text)                 
+while [ "$CreateComplete" == "" ]
+do
+    echo  `date +"%H:%M:%S   waiting for  stack-subnet03  creation to complete"`
+    sleep 5
+    CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-dbsubnetgroup`]' --output text)
+done
+echo "> demo-rds-dbsubnetgroup created."
+
+
+
 echo
 echo "> Downloading template demo-rds-dbinstance"
 curl -so demo-rds-dbinstance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-rds-dbinstance
