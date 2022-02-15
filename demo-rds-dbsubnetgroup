@@ -7,9 +7,9 @@ Parameters:
 
     
 Resources:
-  myDBSubnetGroup:
+  DBSubnetGroup:
     Type: "AWS::RDS::DBSubnetGroup"
     Properties:
-      DBSubnetGroupName:        mySubnetGroupName
-      DBSubnetGroupDescription: mySubnetGroupDescription
+      DBSubnetGroupName:        DBSubnetGroup
+      DBSubnetGroupDescription: DBSubnetGroup
       SubnetIds:                !Ref paramSubnetIds
