@@ -10,5 +10,5 @@ Resources:
       Engine:             MySQL
       MasterUsername:     masteruser
       MasterUserPassword: changeme
-      DBSubnetGroupName:  myDBSubnetGroup
+      DBSubnetGroupName:  DBSubnetGroup
     DeletionPolicy:       Delete
