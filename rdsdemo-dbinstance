@@ -5,9 +5,10 @@ Resources:
   myRDS:
     Type: 'AWS::RDS::DBInstance'
     Properties:
-      AllocatedStorage: '5'
-      DBInstanceClass: db.t2.micro
-      Engine: MySQL
-      MasterUsername: masteruser
+      AllocatedStorage:   '5'
+      DBInstanceClass:    db.t2.micro
+      Engine:             MySQL
+      MasterUsername:     masteruser
       MasterUserPassword: changeme
-    DeletionPolicy: Delete
+      DBSubnetGroupName:  mySubnetGroupName
+    DeletionPolicy:       Delete
