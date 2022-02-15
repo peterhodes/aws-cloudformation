@@ -10,6 +10,6 @@ Resources:
   DBSubnetGroup:
     Type: "AWS::RDS::DBSubnetGroup"
     Properties:
-      DBSubnetGroupName:        DBSubnetGroup2
-      DBSubnetGroupDescription: DBSubnetGroup
+      DBSubnetGroupName:        myDBSubnetGroup
+      DBSubnetGroupDescription: DBSubnetGroup Description
       SubnetIds:                !Ref paramSubnetIds
