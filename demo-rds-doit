@@ -74,7 +74,7 @@ echo "> Downloading template demo-rds-dbsubnetgroup"
 curl -so demo-rds-dbsubnetgroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-rds-dbsubnetgroup
 SubnetIds="$SubnetId01,$SubnetId02,$SubnetId03"
 echo "> Creating stack-dbsubnetgroup  paramSubnetIds=$SubnetIds"
-# aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body file://demo-rds-dbsubnetgroup --parameters ParameterKey=paramSubnetIds,ParameterValue=\"$SubnetIds\"
+aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body file://demo-rds-dbsubnetgroup --parameters ParameterKey=paramSubnetIds,ParameterValue=\"$SubnetIds\"
 
 
 echo
