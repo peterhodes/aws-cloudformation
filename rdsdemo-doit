@@ -16,15 +16,15 @@ echo "> Vpc Id is  >$VpcId<"
 
 
 
-# echo
-# echo "> Downloading template rdsdemo-subnet"
-# curl -so rdsdemo-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/rdsdemo-subnet
-# echo "> Creating stack-subnet01  paramVpcId=$VpcId paramCidrBlock=10.0.1.0/24 paramAvailabilityZone=eu-west-2a"
-# aws cloudformation create-stack --stack-name stack-subnet01 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.1.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2a
-# echo "> Creating stack-subnet02  paramVpcId=$VpcId paramCidrBlock=10.0.2.0/24 paramAvailabilityZone=eu-west-2b"
-# aws cloudformation create-stack --stack-name stack-subnet02 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.2.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2b
-# echo "> Creating stack-subnet03  paramVpcId=$VpcId paramCidrBlock=10.0.3.0/24 paramAvailabilityZone=eu-west-2c"
-# aws cloudformation create-stack --stack-name stack-subnet03 --template-body file://rdsdemo-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.3.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2c
+echo
+echo "> Downloading template demo-rds-subnet"
+curl -so demo-rds-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-rds-subnet
+echo "> Creating stack-subnet01  paramVpcId=$VpcId paramCidrBlock=10.0.1.0/24 paramAvailabilityZone=eu-west-2a"
+aws cloudformation create-stack --stack-name stack-subnet01 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.1.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2a
+echo "> Creating stack-subnet02  paramVpcId=$VpcId paramCidrBlock=10.0.2.0/24 paramAvailabilityZone=eu-west-2b"
+aws cloudformation create-stack --stack-name stack-subnet02 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.2.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2b
+echo "> Creating stack-subnet03  paramVpcId=$VpcId paramCidrBlock=10.0.3.0/24 paramAvailabilityZone=eu-west-2c"
+aws cloudformation create-stack --stack-name stack-subnet03 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.3.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2c
 
 
 echo
@@ -69,19 +69,19 @@ echo "> SubnetId03 is  >$SubnetId03<"
 
 
 
-# echo
-# echo "> Downloading template rdsdemo-dbsubnetgroup"
-# curl -so rdsdemo-dbsubnetgroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/rdsdemo-dbsubnetgroup
-#  SubnetIds="$SubnetId01,$SubnetId02,$SubnetId03"
-#  echo "> Creating stack-dbsubnetgroup  paramSubnetIds=$SubnetIds"
-#  aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body file://rdsdemo-dbsubnetgroup --parameters ParameterKey=paramSubnetIds,ParameterValue=\"$SubnetIds\"
+echo
+echo "> Downloading template demo-rds-dbsubnetgroup"
+curl -so demo-rds-dbsubnetgroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-rds-dbsubnetgroup
+SubnetIds="$SubnetId01,$SubnetId02,$SubnetId03"
+echo "> Creating stack-dbsubnetgroup  paramSubnetIds=$SubnetIds"
+aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body file://demo-rds-dbsubnetgroup --parameters ParameterKey=paramSubnetIds,ParameterValue=\"$SubnetIds\"
 
 
 echo
-echo "> Downloading template rdsdemo-dbinstance"
-curl -so rdsdemo-dbinstance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/rdsdemo-dbinstance
+echo "> Downloading template demo-rds-dbinstance"
+curl -so demo-rds-dbinstance https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-rds-dbinstance
 echo "> Creating stack-dbinstance"
-aws cloudformation create-stack --stack-name stack-dbinstance --template-body file://rdsdemo-dbinstance
+aws cloudformation create-stack --stack-name stack-dbinstance --template-body file://demo-rds-dbinstance
 
 
 
