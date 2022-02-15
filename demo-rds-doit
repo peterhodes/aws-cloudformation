@@ -79,15 +79,15 @@ aws cloudformation create-stack --stack-name stack-dbsubnetgroup --template-body
 
 
 echo
-echo "> Waiting for demo-rds-dbsubnetgroup"
+echo "> Waiting for stack-dbsubnetgroup"
 CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-dbsubnetgroup`]' --output text)                 
 while [ "$CreateComplete" == "" ]
 do
-    echo  `date +"%H:%M:%S   waiting for  stack-subnet03  creation to complete"`
+    echo  `date +"%H:%M:%S   waiting for  stack-dbsubnetgroup  creation to complete"`
     sleep 5
     CreateComplete=$(aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE --query 'StackSummaries[?StackName==`stack-dbsubnetgroup`]' --output text)
 done
-echo "> demo-rds-dbsubnetgroup created."
+echo "> stack-dbsubnetgroup created."
 
 
 
