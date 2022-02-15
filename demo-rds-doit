@@ -20,11 +20,11 @@ echo
 echo "> Downloading template demo-rds-subnet"
 curl -so demo-rds-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-rds-subnet
 echo "> Creating stack-subnet01  paramVpcId=$VpcId paramCidrBlock=10.0.1.0/24 paramAvailabilityZone=eu-west-2a"
-# aws cloudformation create-stack --stack-name stack-subnet01 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.1.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2a
+aws cloudformation create-stack --stack-name stack-subnet01 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.1.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2a
 echo "> Creating stack-subnet02  paramVpcId=$VpcId paramCidrBlock=10.0.2.0/24 paramAvailabilityZone=eu-west-2b"
-# aws cloudformation create-stack --stack-name stack-subnet02 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.2.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2b
+aws cloudformation create-stack --stack-name stack-subnet02 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.2.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2b
 echo "> Creating stack-subnet03  paramVpcId=$VpcId paramCidrBlock=10.0.3.0/24 paramAvailabilityZone=eu-west-2c"
-# aws cloudformation create-stack --stack-name stack-subnet03 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.3.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2c
+aws cloudformation create-stack --stack-name stack-subnet03 --template-body file://demo-rds-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.3.0/24 ParameterKey=paramAvailabilityZone,ParameterValue=eu-west-2c
 
 
 echo
