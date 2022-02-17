@@ -12,5 +12,11 @@ Resources:
       
 Outputs:
   myOutput:
-    Description: Testing
+    Description: Output a parameter.
     Value:       !Ref paramBucketName
+  myOutput02:
+    Description: Output text followed by the substitution of a Pseudo Parameter.
+    Value:       !Sub 'The Region is ${AWS::Region}'
+  myOutput03:
+    Description: Output text followed by the substitution of a User Parameter.
+    Value:       !Sub 'The parameter paramBucketName is ${paramBucketName}'
