@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  paramBucketName:
+    Type: String
+    
+Resources:
+  myBucket:
+    Type:         AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref paramBucketName
+      
+Outputs:
+  myOutput:
+    Description: Testing
+    Value:       !Ref paramBucketName
