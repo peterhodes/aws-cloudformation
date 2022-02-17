@@ -47,7 +47,7 @@
 
 echo
 echo "> Downloading template demo-network-vpc"
-curl -so demo-network-vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-network-vpc
+curl -so demo-network-vpc https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo/network-vpc
 echo "> Creating stack-vpc"
 aws cloudformation create-stack --stack-name stack-vpc --template-body file://demo-network-vpc
 
@@ -69,7 +69,7 @@ echo "> Vpc Id is  >$VpcId<"
 
 echo
 echo "> Downloading template demo-network-subnet"
-curl -so demo-network-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-network-subnet
+curl -so demo-network-subnet https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo/network-subnet
 echo "> Creating stack-subnet  paramVpcId=$VpcId paramCidrBlock=10.0.0.0/24"
 aws cloudformation create-stack --stack-name stack-subnet --template-body file://demo-network-subnet --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramCidrBlock,ParameterValue=10.0.0.0/24
 
@@ -91,7 +91,7 @@ echo "> Subnet Id is  >$SubnetId<"
 
 echo
 echo "> Downloading template demo-network-routetable"
-curl -so demo-network-routetable https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-network-routetable
+curl -so demo-network-routetable https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo/network-routetable
 echo "> Creating stack-routetable  paramVpcId=$VpcId"
 aws cloudformation create-stack --stack-name stack-routetable --template-body file://demo-network-routetable --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
 
@@ -99,7 +99,7 @@ aws cloudformation create-stack --stack-name stack-routetable --template-body fi
 
 echo
 echo "> Downloading template demo-network-securitygroup"
-curl -so demo-network-securitygroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-network-securitygroup
+curl -so demo-network-securitygroup https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo/network-securitygroup
 echo "> Creating stack-securitygroup  paramVpcId=$VpcId"
 aws cloudformation create-stack --stack-name stack-securitygroup --template-body file://demo-network-securitygroup --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId
 
@@ -107,7 +107,7 @@ aws cloudformation create-stack --stack-name stack-securitygroup --template-body
 
 echo
 echo "> Downloading template demo-network-internetgateway"
-curl -so demo-network-internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-network-internetgateway
+curl -so demo-network-internetgateway https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo/network-internetgateway
 echo "> Creating stack-internetgateway"
 aws cloudformation create-stack --stack-name stack-internetgateway --template-body file://demo-network-internetgateway
 
@@ -129,7 +129,7 @@ echo "> Igw Id is  >$IgwId<"
 
 echo
 echo "> Downloading template demo-network-vpcgatewayattachment"
-curl -so demo-network-vpcgatewayattachment https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-network-vpcgatewayattachment
+curl -so demo-network-vpcgatewayattachment https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo/network-vpcgatewayattachment
 echo "> Creating stack-vpcgatewayattachment  paramVpcId=$VpcId paramIgwId=$IgwId"
 aws cloudformation create-stack --stack-name stack-vpcgatewayattachment --template-body file://demo-network-vpcgatewayattachment --parameters ParameterKey=paramVpcId,ParameterValue=$VpcId ParameterKey=paramIgwId,ParameterValue=$IgwId
 
@@ -151,7 +151,7 @@ echo "> RouteTable Id is  >$RouteTableId<"
 
 echo
 echo "> Downloading template demo-network-route"
-curl -so demo-network-route https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-network-route
+curl -so demo-network-route https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo/network-route
 echo "> Creating stack-route  paramRouteTableId=$RouteTableId paramGatewayId=$IgwId"
 aws cloudformation create-stack --stack-name stack-route --template-body file://demo-network-route --parameters ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId ParameterKey=paramGatewayId,ParameterValue=$IgwId
 
@@ -159,7 +159,7 @@ aws cloudformation create-stack --stack-name stack-route --template-body file://
 
 echo
 echo "> Downloading template demo-network-subnetroutetableassociation"
-curl -so demo-network-subnetroutetableassociation https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo-network-subnetroutetableassociation
+curl -so demo-network-subnetroutetableassociation https://raw.githubusercontent.com/peterhodes/aws-cloudformation/main/demo/network-subnetroutetableassociation
 echo "> Creating stack-subnetroutetableassociation  paramSubnetId=$SubnetId paramRouteTableId=$RouteTableId"
 aws cloudformation create-stack --stack-name stack-subnetroutetableassociation --template-body file://demo-network-subnetroutetableassociation --parameters ParameterKey=paramSubnetId,ParameterValue=$SubnetId ParameterKey=paramRouteTableId,ParameterValue=$RouteTableId
 
