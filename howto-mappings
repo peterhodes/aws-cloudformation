@@ -1,27 +1,44 @@
 AWSTemplateFormatVersion: 2010-09-09
 
+Mappings:
+  prod:
+    eu-west-1:
+      ImageId: imageid for prod server in Ireland
+      Subnet:  subnet for prod server in Ireland
+    eu-west-2:
+      ImageId: imageid for prod server in London
+      Subnet:  subnet for prod server in London
+  dev:
+    eu-west-1:
+      ImageId: imageid for dev server in Ireland
+      Subnet:  subnet for dev server in Ireland
+    eu-west-2:
+      ImageId: imageid for dev server in London
+      Subnet:  subnet for dev server in London
+
 Parameters:
   paramBucketName:
     Type: String
-    
 Resources:
   myBucket:
-    Type:         AWS::S3::Bucket
+    Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: !Ref paramBucketName
-      
 Outputs:
   myOutput:
     Description: Output a parameter.
-    Value:       !Ref paramBucketName
+    Value: !FindInMap 
+      - prod
+      - eu-west-2
+      - ImageId
   myOutput02:
-    Description: Output text followed by the substitution of a Pseudo Parameter.
-    Value:       !Sub 'The Region is ${AWS::Region}'
-  myOutput03:
-    Description: Output text followed by the substitution of a User Parameter.
-    Value:       !Sub 'The parameter paramBucketName is ${paramBucketName}'      
-  myOutput04:
-    Description: Output a parameter using a local mapping.
-    Value: !Sub 
-      - 'An example of a mapped value ${mappedValue}'
-      - mappedValue: !Ref paramBucketName
+    Description: Join text with the result from a map lookup.
+    Value: !Join 
+      - ' '
+      - - The subnet for Ireland dev server is
+        - !FindInMap 
+          - dev
+          - eu-west-1
+          - Subnet
+
+      
