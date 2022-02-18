@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  paramBucketName:
+    Type: String
+
+Conditions:
+  BucketCondition:
+    !Equals [ !Ref paramBucketName, 'par111111' ]
+    
+Resources:
+  myBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Ref paramBucketName
+
+Outputs:
+  myOutput:
+    Description: Output a parameter.
+    Value: !If 
+      - BucketCondition
+      - BucketName match is true
+      - BucketName match is false
