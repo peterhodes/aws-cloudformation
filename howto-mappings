@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  paramBucketName:
+    Type: String
+    
+Resources:
+  myBucket:
+    Type:         AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref paramBucketName
+      
+Outputs:
+  myOutput:
+    Description: Output a parameter.
+    Value:       !Ref paramBucketName
+  myOutput02:
+    Description: Output text followed by the substitution of a Pseudo Parameter.
+    Value:       !Sub 'The Region is ${AWS::Region}'
+  myOutput03:
+    Description: Output text followed by the substitution of a User Parameter.
+    Value:       !Sub 'The parameter paramBucketName is ${paramBucketName}'      
+  myOutput04:
+    Description: Output a parameter using a local mapping.
+    Value: !Sub 
+      - 'An example of a mapped value ${mappedValue}'
+      - mappedValue: !Ref paramBucketName
