@@ -10,7 +10,8 @@ Conditions:
     
 Resources:
   myBucket:
-    Type: 'AWS::S3::Bucket'
+    Condition: BucketCondition
+    Type:      'AWS::S3::Bucket'
     Properties:
       BucketName: !Ref paramBucketName
 
